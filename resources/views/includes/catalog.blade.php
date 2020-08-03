@@ -15,12 +15,12 @@
                       <input type="hidden" name="sort" value="{{ request()->input('sort') }}">
                     @endif
                     <ul class="filter-list">
-                      @foreach ($categories as $element)
                       <li>
                         <div class="content">
-                            <a href="{{route('front.category', $element->slug)}}{{!empty(request()->input('search')) ? '?search='.request()->input('search') : ''}}" class="category-link"> <i class="fas fa-angle-double-right"></i> {{$element->name}}</a>
-                            @if(!empty($cat) && $cat->id == $element->id && !empty($cat->subs))
+                            <a href="{{route('front.category', $cat->slug)}}{{!empty(request()->input('search')) ? '?search='.request()->input('search') : ''}}" class="category-link"> <i class="fas fa-angle-double-right"></i> {{$cat->name}}</a>
+                            @if(!empty($cat) && $cat->id == $cat->id && !empty($cat->subs))
                                 @foreach ($cat->subs as $key => $subelement)
+                                    @continue(!empty($subcat) && $subcat->id != $subelement->id)
                                 <div class="sub-content open">
                                   <a href="{{route('front.category', [$cat->slug, $subelement->slug])}}{{!empty(request()->input('search')) ? '?search='.request()->input('search') : ''}}" class="subcategory-link"><i class="fas fa-angle-right"></i>{{$subelement->name}}</a>
                                   @if(!empty($subcat) && $subcat->id == $subelement->id && !empty($subcat->childs))
@@ -38,7 +38,6 @@
 
 
                       </li>
-                      @endforeach
 
                     </ul>
 

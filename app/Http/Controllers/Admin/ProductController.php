@@ -824,6 +824,11 @@ class ProductController extends Controller
         });
 
         $canvas->insert($image, 'center');
+        $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
+            ->resize(384, 384, function($constraint) {
+                $constraint->aspectRatio();
+            });
+        $canvas->insert($waterMark, 'bottom-left', 0, 20);
         $canvas->save(public_path() . $path);
 
         // change end
@@ -898,6 +903,11 @@ class ProductController extends Controller
             });
 
             $canvas->insert($image, 'center');
+            $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
+                ->resize(384, 384, function($constraint) {
+                    $constraint->aspectRatio();
+                });
+            $canvas->insert($waterMark, 'bottom-left', 0, 20);
             $canvas->save(public_path() . $path);
             $input['photo'] = $image_name;
 
@@ -1153,6 +1163,11 @@ class ProductController extends Controller
                     });
 
                     $canvas->insert($image, 'center');
+                    $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
+                        ->resize(384, 384, function($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    $canvas->insert($waterMark, 'bottom-left', 0, 20);
                     $canvas->save(public_path().'/assets/images/galleries/'.$name);
 
                     $gallery['photo'] = $name;

@@ -50,6 +50,11 @@ class GalleryController extends Controller
                         $constraint->aspectRatio();
                     });
                     $canvas->insert($image, 'center');
+                    $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
+                        ->resize(384, 384, function($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    $canvas->insert($waterMark, 'bottom-left', 0, 20);
                     $canvas->save(public_path().'/assets/images/galleries/'.$thumbnail);
 
 
