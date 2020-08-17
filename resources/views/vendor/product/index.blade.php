@@ -26,7 +26,12 @@
 								<div class="col-lg-12">
 									<div class="mr-table allproduct">
 
-                        @include('includes.vendor.form-success')  
+                        @include('includes.vendor.form-success')
+										<div class="row mb-3">
+											<div class="col-auto ml-auto">
+												<a href="{{ route('vendor-prod-export') }}" class="btn btn-light border">Выгрузить csv</a>
+											</div>
+										</div>
 
 										<div class="table-responsiv">
 												<table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
@@ -35,6 +40,7 @@
 									                        <th>{{ $langg->lang608 }}</th>
 									                        <th>{{ $langg->lang609 }}</th>
 									                        <th>{{ $langg->lang610 }}</th>
+															<th>{{ __("Количество") }}</th>
 									                        <th>{{ $langg->lang611 }}</th>
 															<th>{{__('Проблема деактивации')}}</th>
 									                        <th>{{ $langg->lang612 }}</th>
@@ -170,6 +176,7 @@
                         { data: 'name', name: 'name' },
                         { data: 'type', name: 'type' },
                         { data: 'price', name: 'price' },
+						{ data: 'count', name: 'count' },
 						{ data: 'status', searchable: false, orderable: false},
 						{ data: 'issue_deactivate', name: 'issue_deactivate'},
             			{ data: 'action', searchable: false, orderable: false }
@@ -189,7 +196,7 @@
           '<i class="fas fa-plus"></i> <span class="remove-mobile">{{ $langg->lang623 }}<span>'+
           '</a>'+
           '</div>');
-      });											
+      });
 									
 
 

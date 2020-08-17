@@ -1119,6 +1119,7 @@ Route::prefix('vendor')->group(function() {
 
   Route::get('/products/datatables', 'Vendor\ProductController@datatables')->name('vendor-prod-datatables'); //JSON REQUEST
   Route::get('/products', 'Vendor\ProductController@index')->name('vendor-prod-index');
+  Route::get('/products/export', 'Vendor\ProductController@export')->name('vendor-prod-export');
 
   Route::post('/products/upload/update/{id}', 'Vendor\ProductController@uploadUpdate')->name('vendor-prod-upload-update');
 

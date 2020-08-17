@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Input;
 use Image;
 use Session;
 use Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
 
 class ProductController extends Controller
 {
@@ -66,6 +68,10 @@ class ProductController extends Controller
                                 $price = $sign->sign.$price ;
                                 return  $price;
                             })
+                            ->editColumn('count', function(Product $data) {
+                                $stock = $data->stock;
+                                return is_null($stock) ? 0 : $stock;
+                            })
                             ->addColumn('status', function(Product $data) {
                                 // if(Auth::guard('admin')->user()->role_id == 0 || Auth::guard('admin')->user()->role_id == 17){
                                 //     $class = $data->status == 1 ? 'drop-success' : 'drop-danger';
@@ -90,7 +96,6 @@ class ProductController extends Controller
                             ->rawColumns(['name', 'status', 'action'])
                             ->toJson(); //--- Returning Json Data To Client Side
     }
-
 
     //*** JSON Request
     public function catalogdatatables()
@@ -124,6 +129,12 @@ class ProductController extends Controller
     public function index()
     {
         return view('vendor.product.index');
+    }
+
+    // GET
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
     }
 
 
