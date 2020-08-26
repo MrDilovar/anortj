@@ -26,8 +26,12 @@
 								<div class="col-lg-12">
 									<div class="mr-table allproduct">
 
-                        @include('includes.admin.form-success')  
-
+                        @include('includes.admin.form-success')
+										<div class="row mb-3">
+											<div class="col-auto ml-auto">
+												<button class="btn btn-light border" data-toggle="modal" data-target="#export-products">Выгрузить csv</button>
+											</div>
+										</div>
 										<div class="table-responsiv">
 												<table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
 													<thead>
@@ -151,7 +155,65 @@
 
 {{-- DELETE MODAL ENDS --}}
 
+{{-- EXPORT PRODUCT	--}}
 
+<div class="modal fade" id="export-products" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
+	<form action="{{ route('admin-prod-export') }}" method="POST">
+		{{ csrf_field() }}
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+
+				<div class="modal-header d-block text-center">
+					<h4 class="modal-title d-inline-block">{{ __("Выгрузить продукты") }}</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="col-lg-4">
+							<label for="inputPrice">Магазин</label>
+						</div>
+						<div class="col-lg-8">
+							<select class="form-control form-control-sm" name="store_id">
+								<option value="all">Все магазины</option>
+								<option value="0">Anor.tj</option>
+								@foreach($stores as $store)
+									<option value="{{ $store->id }}">{{ is_null($store->shop_name) ? $store->name : $store->shop_name }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-lg-4">
+							<label for="inputPrice">Статус товара</label>
+						</div>
+						<div class="col-lg-8">
+							<select class="form-control form-control-sm" name="status_product_id">
+								<option value="all">Все товары</option>
+								<option value="1">Activated</option>
+								<option value="0">Deactivated</option>
+								<option value="2">Waiting</option>
+								<option value="3">Changed</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{ __("Отменить") }}</button>
+					<button type="submit" class="btn btn-success">{{ __("Выгрузить") }}</button>
+				</div>
+
+			</div>
+		</div>
+	</form>
+</div>
+
+{{-- EXPORT PRODUCT END	--}}
 
 {{-- ISSUE DEACTIVATED PRODUCT	--}}
 	<div class="modal fade" id="deactivated-product" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">

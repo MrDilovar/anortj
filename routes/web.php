@@ -93,7 +93,8 @@ Route::prefix('admin')->group(function() {
 
   Route::get('/products/datatables', 'Admin\ProductController@datatables')->name('admin-prod-datatables'); //JSON REQUEST
   Route::get('/products', 'Admin\ProductController@index')->name('admin-prod-index');
-  // Rouet отчетности 
+      Route::post('/products/export', 'Admin\ProductController@export')->name('admin-prod-export');
+  // Rouet отчетности
   Route::get('/products/report/datatables', 'Admin\ProductController@datatablesReport')->name('admin-prod-report-datatables'); //JSON REQUEST
   Route::get('/products/report', 'Admin\ProductController@indexReport')->name('admin-prod-report-index');
  // Rouet активности модераторов

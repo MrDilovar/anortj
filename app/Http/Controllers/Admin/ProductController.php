@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AdminProductsExport;
 use App\Models\Childcategory;
 use App\Models\Subcategory;
 use Datatables;
@@ -17,6 +18,7 @@ use App\Models\AttributeOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 use Image;
 use DB;
@@ -664,7 +666,18 @@ class ProductController extends Controller
     //*** GET Request
     public function index()
     {
-        return view('admin.product.index');
+        $stores = User::select('id', 'shop_name', 'name')->where('is_vendor','<>', 0)->get();
+        return view('admin.product.index', compact('stores'));
+    }
+
+    // POST
+    public function export(Request $request)
+    {
+        $store_id = ($request->has('store_id') && $request->store_id !== 'all') ? (int)$request->store_id : null;
+        $status_product_id = ($request->has('status_product_id') && $request->status_product_id !== 'all')
+            ? (int)$request->status_product_id : null;
+
+        return Excel::download(new AdminProductsExport($store_id, $status_product_id), 'products.xlsx');
     }
 
     //*** GET Request
