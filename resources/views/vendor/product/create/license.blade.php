@@ -281,15 +281,13 @@
 													<div class="col-lg-7">
 														<input  name="youtube" type="text" class="input-field" placeholder="{{ $langg->lang682 }}">
 							                            <div class="checkbox-wrapper">
-							                              <input type="checkbox" name="seo_check" class="checkclick" id="allowProductSEO" value="1">
-							                              <label for="allowProductSEO">{{ $langg->lang683 }}</label>
+															<input type="checkbox" name="seo_check" value="1" hidden>
 							                            </div>
 													</div>
 												</div>
 
 
 
-						                        <div class="showbox">
 						                          <div class="row">
 						                            <div class="col-lg-4">
 						                              <div class="left-area">
@@ -312,11 +310,10 @@
 						                            </div>
 						                            <div class="col-lg-7">
 						                              <div class="text-editor">
-						                                <textarea name="meta_description" class="input-field" placeholder="{{ $langg->lang685 }}"></textarea> 
+						                                <textarea name="meta_description" class="input-field" placeholder="{{ $langg->lang685 }}" required></textarea>
 						                              </div>
 						                            </div>
 						                          </div>
-						                        </div>
 
 												<div class="row">
 													<div class="col-lg-4">
