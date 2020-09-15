@@ -33,6 +33,7 @@
 														<tr>
 															<th>{{ __("Category") }}</th>
 			                        <th>{{ __("Name") }}</th>
+									<th width="20%">{{ __('Кол-во товаров') }}</th>
 			                        <th>{{ __("Slug") }}</th>
 															<th>{{ __('Attributes') }}</th>
 			                        <th>{{ __("Status") }}</th>
@@ -150,6 +151,7 @@
                columns: [
                			{ data: 'category', searchable: false, orderable: false},
                         { data: 'name', name: 'name' },
+				   		{ data: 'count_products', name: 'count_products' },
                         { data: 'slug', name: 'slug' },
                         { data: 'attributes', name: 'attributes', searchable: false, orderable: false },
                         { data: 'status', searchable: false, orderable: false},

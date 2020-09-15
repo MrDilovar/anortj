@@ -28,6 +28,9 @@ class CategoryController extends Controller
          $datas = Category::orderBy('id','desc')->get();
          //--- Integrating This Collection Into Datatables
          return Datatables::of($datas)
+                            ->addColumn('count_products', function ($data) {
+                                return $data->products->count();
+                            })
                             ->addColumn('status', function(Category $data) {
                                 $class = $data->status == 1 ? 'drop-success' : 'drop-danger';
                                 $s = $data->status == 1 ? 'selected' : '';

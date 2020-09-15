@@ -32,6 +32,7 @@
 													<thead>
 														<tr>
 				                        <th width="20%">{{ __('Name') }}</th>
+				                        <th width="20%">{{ __('Кол-во товаров') }}</th>
 				                        <th width="20%">{{ __('Slug') }}</th>
 																<th>{{ __('Attributes') }}</th>
 				                        <th>{{ __('Status') }}</th>
@@ -148,6 +149,7 @@
                ajax: '{{ route('admin-cat-datatables') }}',
                columns: [
                         { data: 'name', name: 'name' },
+                        { data: 'count_products', name: 'count_products' },
 												{ data: 'slug', name: 'slug' },
                         { data: 'attributes', name: 'attributes', searchable: false, orderable: false },
                         { data: 'status', searchable: false, orderable: false},

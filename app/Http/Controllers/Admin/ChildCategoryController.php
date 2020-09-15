@@ -30,6 +30,9 @@ class ChildCategoryController extends Controller
                             ->addColumn('subcategory', function(Childcategory $data) {
                                 return $data->subcategory->name;
                             })
+                             ->addColumn('count_products', function ($data) {
+                                 return $data->products->count();
+                             })
                             ->addColumn('status', function(Childcategory $data) {
                                 $class = $data->status == 1 ? 'drop-success' : 'drop-danger';
                                 $s = $data->status == 1 ? 'selected' : '';

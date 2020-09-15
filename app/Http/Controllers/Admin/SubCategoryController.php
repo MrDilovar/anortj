@@ -26,6 +26,9 @@ class SubCategoryController extends Controller
                             ->addColumn('category', function(Subcategory $data) {
                                 return $data->category->name;
                             })
+                            ->addColumn('count_products', function ($data) {
+                                return $data->products->count();
+                            })
                             ->addColumn('status', function(Subcategory $data) {
                                 $class = $data->status == 1 ? 'drop-success' : 'drop-danger';
                                 $s = $data->status == 1 ? 'selected' : '';
