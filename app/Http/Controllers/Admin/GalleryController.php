@@ -43,20 +43,13 @@ class GalleryController extends Controller
 
                     //$img = Image::make($file->getRealPath())->resize(800, 800);
                     $thumbnail = time().$file->getClientOriginalName();
-                    $canvas = Image::canvas(1024, 1024);
-					$canvas->fill('#ffffff');
-                    $image  = Image::make($file->getRealPath())->resize(1024, 1024, function($constraint)
-                    {
-                        $constraint->aspectRatio();
-                    });
-                    $canvas->insert($image, 'center');
-                    $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
-                        ->resize(384, 384, function($constraint) {
-                            $constraint->aspectRatio();
-                        });
-                    $canvas->insert($waterMark, 'bottom-left', 0, 20);
-                    $canvas->save(public_path().'/assets/images/galleries/'.$thumbnail);
 
+                    Image::canvas(1024, 1024)
+                        ->fill('#ffffff')
+                        ->insert(Image::make($file->getRealPath())->resize(1024, 1024,
+                            function($constraint) {$constraint->aspectRatio();}), 'center')
+                        ->insert(public_path() . '/assets/images/watermark/watermark.png')
+                        ->save(public_path() . '/assets/images/galleries/' . $thumbnail);
 
                     $gallery['photo'] = $thumbnail;
                     $gallery['product_id'] = $lastid;

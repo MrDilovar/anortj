@@ -205,20 +205,12 @@ class ProductController extends Controller
         $image = base64_decode($image);
         $image_name = time().str_random(8).'.png';
         $path = '/assets/images/products/'.$image_name;
-        $canvas = Image::canvas(1024, 1024);
-		$canvas->fill('#ffffff');
-        $image  = Image::make($image)->resize(1024, 1024, function($constraint)
-        {
-            $constraint->aspectRatio();
-        });
-
-        $canvas->insert($image, 'center');
-        $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
-            ->resize(384, 384, function($constraint) {
-                $constraint->aspectRatio();
-            });
-        $canvas->insert($waterMark, 'bottom-left', 0, 20);
-        $canvas->save(public_path() . $path);
+        Image::canvas(1024, 1024)
+            ->fill('#ffffff')
+            ->insert(Image::make($image)->resize(1024, 1024,
+                function($constraint) {$constraint->aspectRatio();}), 'center')
+            ->insert(public_path() . '/assets/images/watermark/watermark.png')
+            ->save(public_path() . $path);
         
         file_put_contents($path, $image);
                 if($data->photo != null)
@@ -461,20 +453,12 @@ class ProductController extends Controller
             $image = base64_decode($image);
             $image_name = time().str_random(8).'.png';
             $path = '/assets/images/products/'.$image_name;
-            $canvas = Image::canvas(1024, 1024);
-            $canvas->fill('#ffffff');
-            $image  = Image::make($image)->resize(1024, 1024, function($constraint)
-            {
-                $constraint->aspectRatio();
-            });
-
-            $canvas->insert($image, 'center');
-            $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
-                ->resize(384, 384, function($constraint) {
-                    $constraint->aspectRatio();
-                });
-            $canvas->insert($waterMark, 'bottom-left', 0, 20);
-            $canvas->save(public_path() . $path);
+            Image::canvas(1024, 1024)
+                ->fill('#ffffff')
+                ->insert(Image::make($image)->resize(1024, 1024,
+                    function($constraint) {$constraint->aspectRatio();}), 'center')
+                ->insert(public_path() . '/assets/images/watermark/watermark.png')
+                ->save(public_path() . $path);
             $input['photo'] = $image_name;
             // change end
 
@@ -713,20 +697,12 @@ class ProductController extends Controller
                              // change start
                             $gallery = new Gallery;
                             $name = time().$file->getClientOriginalName();
-                            $canvas = Image::canvas(1024, 1024);
-                            $canvas->fill('#ffffff');
-                            $image  = Image::make($file->getRealPath())->resize(1024, 1024, function($constraint)
-                            {
-                                $constraint->aspectRatio();
-                            });
-
-                            $canvas->insert($image, 'center');
-                            $waterMark = Image::make(public_path() . '/assets/images/watermark.png')
-                                ->resize(384, 384, function($constraint) {
-                                    $constraint->aspectRatio();
-                                });
-                            $canvas->insert($waterMark, 'bottom-left', 0, 20);
-                            $canvas->save(public_path().'/assets/images/galleries/'.$name);
+                            Image::canvas(1024, 1024)
+                                ->fill('#ffffff')
+                                ->insert(Image::make($file->getRealPath())->resize(1024, 1024,
+                                    function($constraint) {$constraint->aspectRatio();}), 'center')
+                                ->insert(public_path() . '/assets/images/watermark/watermark.png')
+                                ->save(public_path() . '/assets/images/galleries/' . $name);
 
                             $gallery['photo'] = $name;
                             $gallery['product_id'] = $lastid;
